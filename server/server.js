@@ -8,7 +8,7 @@ const app = express();
 const PORT = 5000;
 
 const corsOptions = {
-  origin: 'https://ngo-frontend-o7th.onrender.com',
+  origin: 'https://ngo-frontend-o7th.onrender.com', // Correct domain
   methods: 'GET,POST,PUT,DELETE',
   credentials: true,
   allowedHeaders: ['Content-Type', 'Authorization'],
@@ -18,7 +18,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 
-// Debugging middleware
+// Debugging middleware to check the request origin
 app.use((req, res, next) => {
   console.log('Request Origin:', req.get('Origin'));
   next();
@@ -26,6 +26,8 @@ app.use((req, res, next) => {
 
 app.use('/api/auth/', router);
 app.use('/api/admin', admin);
+
+app.options('*', cors(corsOptions)); // Handle preflight requests
 
 connectDB().then(() => {
   app.listen(PORT, () => {
