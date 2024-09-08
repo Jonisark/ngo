@@ -10,7 +10,7 @@
 // const ErrorMiddlewere = require('./middlewere/ErrorMiddlewere')
 
 // const corsOptions = {
-//   origin: 'https://ngo-frontend-o7th.onrender.com/login',
+//   origin: 'https://ngo-frontend-o7th.onrender.com/',
 //   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
 //   Credential: true,
 //   optionsSuccessStatus: 204,
