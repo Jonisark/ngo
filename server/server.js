@@ -36,7 +36,7 @@ const app = express()
 const PORT = 5000;
 
 app.use(cors({
-  origin: 'http://localhost:5173', 
+  origin: 'https://ngo-frontend-o7th.onrender.com/login', 
   methods: ['GET', 'POST', 'PUT', 'DELETE','PATCH'],
   credentials: true
 }));
