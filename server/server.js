@@ -1,55 +1,37 @@
-
-// require('dotenv').config();
-
-// const express = require('express');
-// const cors = require('cors');
-// const app = express();
-// const PORT = 5000;
-// const router = require('./router/auth.router');
-// const connectDb = require('./utils/db');
-// const ErrorMiddlewere = require('./middlewere/ErrorMiddlewere')
-
-// const corsOptions = {
-//   origin: 'https://ngo-frontend-o7th.onrender.com/',
-//   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-//   Credential: true,
-//   optionsSuccessStatus: 204,
-// }
-
-// app.use(cors(corsOptions))
-// app.use(express.json())
-// app.use('/api/auth/',router)
-// app.use(ErrorMiddlewere)
-
-// connectDb().then(() => {
-//   app.listen(PORT, () => {
-//     console.log('server is live on port ' + PORT)
-// })  
-// });
-require('dotenv').config()
+require('dotenv').config();
 const express = require('express');
-const router = require('./router/auth.router');
-const connectDB = require('./utils/db');
-const admin = require('./router/admin-router')
 const cors = require('cors');
-const app = express()
+const router = require('./router/auth.router');
+const admin = require('./router/admin-router');
+const connectDB = require('./utils/db');
+const app = express();
 const PORT = 5000;
 
-app.use(cors({
-  origin: 'https://ngo-frontend-o7th.onrender.com/login', 
-  methods: ['GET', 'POST', 'PUT', 'DELETE','PATCH'],
-  credentials: true
-}));
+const corsOptions = {
+  origin: 'https://ngo-frontend-o7th.onrender.com',
+  methods: 'GET,POST,PUT,DELETE',
+  credentials: true,
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  optionsSuccessStatus: 200,
+};
 
-app.use(express.json())
-app.use('/api/auth/',router)
-app.use('/api/admin',admin)
+app.use(cors(corsOptions));
+app.use(express.json());
+
+// Debugging middleware
+app.use((req, res, next) => {
+  console.log('Request Origin:', req.get('Origin'));
+  next();
+});
+
+app.use('/api/auth/', router);
+app.use('/api/admin', admin);
 
 connectDB().then(() => {
-  app.listen(PORT,() => {
-  console.log('the server is on localhost ' + 5000)
+  app.listen(PORT, () => {
+    console.log('The server is running on http://localhost:' + PORT);
+  });
 });
-})
 
 
 
