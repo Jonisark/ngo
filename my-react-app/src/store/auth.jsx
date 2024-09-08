@@ -10,7 +10,7 @@ export const AuthProvider = ({children}) => {
     const [isLoading , setIsLoding] = useState(true)
     const authorization = `Bearer ${token}`
 
-    const API = import.meta.env.VITE_API_URI_API || `http://localhost:5000`;
+    const API = import.meta.env.VITE_API_URI_API || `https://ngo-backend-new.onrender.com`;
 
     console.log('api auth',import.meta.env)
 
